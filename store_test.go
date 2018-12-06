@@ -13,11 +13,11 @@ import (
 )
 
 // Check store implementations
-var _ store = &cookieStore{}
+var _ Store = &cookieStore{}
 
 // brokenSaveStore is a CSRF store that cannot, well, save.
 type brokenSaveStore struct {
-	store
+	Store
 }
 
 func (bs *brokenSaveStore) Get(*http.Request) ([]byte, error) {
@@ -34,7 +34,7 @@ func TestStoreCannotSave(t *testing.T) {
 	s := http.NewServeMux()
 	bs := &brokenSaveStore{}
 	s.HandleFunc("/", testHandler)
-	p := Protect(testKey, setStore(bs))(s)
+	p := Protect(testKey, SetStore(bs))(s)
 
 	r, err := http.NewRequest("GET", "/", nil)
 	if err != nil {

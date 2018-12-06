@@ -55,7 +55,7 @@ var (
 type csrf struct {
 	h    http.Handler
 	sc   *securecookie.SecureCookie
-	st   store
+	st   Store
 	opts options
 }
 

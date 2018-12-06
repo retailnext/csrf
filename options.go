@@ -99,7 +99,7 @@ func CookieName(name string) Option {
 
 // setStore sets the store used by the CSRF middleware.
 // Note: this is private (for now) to allow for internal API changes.
-func setStore(s store) Option {
+func SetStore(s Store) Option {
 	return func(cs *csrf) {
 		cs.st = s
 	}
